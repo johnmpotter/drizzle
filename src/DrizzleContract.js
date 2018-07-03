@@ -1,5 +1,6 @@
 class DrizzleContract {
   constructor(web3Contract, web3, name, store, events = [], contractArtifact = {}) {
+    this.web3Contract = web3Contract
     this.abi = web3Contract.options.jsonInterface
     this.address = web3Contract.options.address
     this.web3 = web3
@@ -26,7 +27,7 @@ class DrizzleContract {
     if (events.length > 0) {
       for (i = 0; i < events.length; i++) {
         let event = events[i]
-        
+
         if ( typeof event === 'object' ) {
           store.dispatch({type: 'LISTEN_FOR_EVENT', contract: this, eventName: event.eventName, eventOptions: event.eventOptions})
         } else {
